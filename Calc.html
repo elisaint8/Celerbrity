@@ -1,41 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
     <style>
-    body{
-        border-style: inset;
-        width: 400px;
-    }
-    .stat{
-        width:200px;
-        block-size:50px;
-        display:inline-block
-    }
-    .inputStat{
-        width: 60px;
-    }
+        body {
+            margin: 20px;
+            padding: 20px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            background: #b8aaf9;
+            border-style: inset;
+            width: 500px;
+        }
+
+        .stat {
+            width: 200px;
+            block-size: 50px;
+            display: inline-block;
+        }
+
+        .lblStatName {
+        	display: inline-block;
+            width: 100px;
+            border: 1px;
+            
+        }
+
+        .inputStat {
+            width: 60px;
+        }
     </style>
 </head>
+
 <body>
+	<div>
     <div>
-    <label>캐릭터 스탯</label>
+        <label><h2>캐릭터 스탯</h2></label>
     </div>
     <div class="stat">
-    공격력 <input type="text" class="inputStat" name="att" id="att">
+        <label class="lblStatName" for="att">공격력</label>
+        <input type="text" class="inputStat" name="att" id="att">
     </div>
     <div class="stat">
-    방어력 <input type="text" class="inputStat" name="def" id="def">
+        <label class="lblStatName" for="def">방어력</label>
+        <input type="text" class="inputStat" name="def" id="def">
     </div>
     <div class="stat">
-    치명타확률 <input type="text" class="inputStat" name="cri" id="cri">
+        <label class="lblStatName" for="cri">치명타확률</label>
+        <input type="text" class="inputStat" name="cri" id="cri">
     </div>
     <div class="stat">
-    치명타데미지 <input type="text" class="inputStat" name="cdmg" id="cdmg">
+        <label class="lblStatName" for="cdmg">치명타데미지</label>
+        <input type="text" class="inputStat" name="cdmg" id="cdmg">
     </div>
     <div class="stat">
-    보스데미지 <input type="text" class="inputStat" name="bdmg" id="bdmg">
-    </div>  
+        <label class="lblStatName" for="bdmg">보스데미지</label>
+        <input type="text" class="inputStat" name="bdmg" id="bdmg">
+    </div>
+    <div class="stat">
+        <label class="lblStatName" for="aspd">공격속도</label>
+        <input type="text" class="inputStat" name="aspd" id="aspd">
+    </div>
+    </div>
+    <div>
+        <input type="button" class="btnComp" name=comp id="comp" value="완료">   
+    </div>
+    <script type="text/javascript">
+    	var att = document.querySelector('#att');
+    	console.log(att);
+    	att.addEventListener("blur", function (){
+        	console.log(att);   		
+    	});
+    </script>
 </body>
+
 </html>
