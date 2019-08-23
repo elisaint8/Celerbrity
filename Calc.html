@@ -3,25 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <style>
+    body{
+        border-style: inset
+    }
+    .stat{
+        width:200px;
+        block-size:50px;
+        display:inline-block
+    }
+    .inputStat{
+        width: 60px;
+    }
+    </style>
 </head>
 <body>
     <div>
     <label>캐릭터 스탯</label>
     </div>
     <div class="stat">
-    공격력 <input type="text" name="att" id="att">
+    공격력 <input type="text" class="inputStat" name="att" id="att">
     </div>
     <div class="stat">
-    방어력 <input type="text" name="def" id="def">
+    방어력 <input type="text" class="inputStat" name="def" id="def">
     </div>
     <div class="stat">
-    치명타확률 <input type="text" name="cri" id="cri">
+    치명타확률 <input type="text" class="inputStat" name="cri" id="cri">
     </div>
     <div class="stat">
-    치명타데미지 <input type="text" name="cdmg" id="cdmg">
+    치명타데미지 <input type="text" class="inputStat" name="cdmg" id="cdmg">
     </div>
     <div class="stat">
-    보스증뎀 <input type="text" name="bdmg" id="bdmg">
+    보스데미지 <input type="text" class="inputStat" name="bdmg" id="bdmg">
     </div>  
 </body>
 </html>
