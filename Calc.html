@@ -36,7 +36,7 @@
 <body>
 	<div>
     <div>
-        <label><h2>캐릭터 스탯</h2></label>
+        <label><h3>캐릭터 스탯</h3></label>
     </div>
     <div class="stat">
         <label class="lblStatName" for="att">공격력</label>
@@ -67,10 +67,14 @@
         <input type="button" class="btnComp" name=comp id="comp" value="완료">   
     </div>
     <script type="text/javascript">
-    	var att = document.querySelector('#att');
-    	console.log(att);
-    	att.addEventListener("blur", function (){
-        	console.log(att);   		
+        var att = document.querySelector('#att');
+        var cri = document.querySelector('#cri');
+        var cdmg = document.querySelector('#cdmg');
+        var bdmg = document.querySelector('#bdmg');
+        var comp = document.querySelector('#comp');
+        att.addEventListener("click", function (){
+        var baseDmg = att*cri*cdmg;
+        alert('baseDmg');
     	});
     </script>
 </body>
