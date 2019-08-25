@@ -21,10 +21,10 @@
         }
 
         .lblStatName {
-        	display: inline-block;
+            display: inline-block;
             width: 100px;
             border: 1px;
-            
+
         }
 
         .inputStat {
@@ -34,37 +34,58 @@
 </head>
 
 <body>
-	<div>
     <div>
-        <label><h3>캐릭터 스탯</h3></label>
-    </div>
-    <div class="stat">
-        <label class="lblStatName" for="att">공격력</label>
-        <input type="text" class="inputStat" name="att" id="att">
-    </div>
-    <div class="stat">
-        <label class="lblStatName" for="def">방어력</label>
-        <input type="text" class="inputStat" name="def" id="def">
-    </div>
-    <div class="stat">
-        <label class="lblStatName" for="cri">치명타확률</label>
-        <input type="text" class="inputStat" name="cri" id="cri">
-    </div>
-    <div class="stat">
-        <label class="lblStatName" for="cdmg">치명타데미지</label>
-        <input type="text" class="inputStat" name="cdmg" id="cdmg">
-    </div>
-    <div class="stat">
-        <label class="lblStatName" for="bdmg">보스데미지</label>
-        <input type="text" class="inputStat" name="bdmg" id="bdmg">
-    </div>
-    <div class="stat">
-        <label class="lblStatName" for="aspd">공격속도</label>
-        <input type="text" class="inputStat" name="aspd" id="aspd">
-    </div>
+        <div>
+            <label>
+                <h3>캐릭터 스탯</h3>
+            </label>
+        </div>
+        <div class="stat">
+            <label class="lblStatName" for="att">공격력</label>
+            <input type="text" class="inputStat" name="att" id="att">
+        </div>
+        <div class="stat">
+            <label class="lblStatName" for="cri">치명타확률</label>
+            <input type="text" class="inputStat" name="cri" id="cri">
+        </div>
+        <div class="stat">
+            <label class="lblStatName" for="cdmg">치명타데미지</label>
+            <input type="text" class="inputStat" name="cdmg" id="cdmg">
+        </div>
+        <div class="stat">
+            <label class="lblStatName" for="dmg">데미지</label>
+            <input type="text" class="inputStat" name="dmg" id="cdmg">
+        </div>
+        <div class="stat">
+            <label class="lblStatName" for="bdmg">보스데미지</label>
+            <input type="text" class="inputStat" name="bdmg" id="bdmg">
+        </div>
+        <div class="stat">
+            <label class="lblStatName" for="aspd">공격속도</label>
+            <input type="text" class="inputStat" name="aspd" id="aspd">
+        </div>
+        <div class="stat">
+            <label class="lblStatName" for="def">방어력</label>
+            <input type="text" class="inputStat" name="def" id="def">
+        </div>
     </div>
     <div>
-        <input type="button" class="btnComp" name=comp id="comp" value="완료">   
+        <label>
+            <h3>버프 스탯</h3>
+        </label>
+    </div>
+    <div class="stat">
+        <label class="lblStatName" for="buffAttF">고정공격력</label>
+        <input type="text" class="inputStat" name="buffAttF" id="buffAttF">
+    </div>
+    <div class="stat">
+        <label class="lblStatName" for="buffAttR">%공격력</label>
+        <input type="text" class="inputStat" name="buffAttR" id="buffAttR">
+    </div>
+</div>
+    <div>
+        <input type="button" class="btnComp" name="comp" id="comp" value="완료">
+        <input type="text" readonly class="baseDmg" name="baseDmg" id="baseDmg" value="초기벨류">
     </div>
     <script type="text/javascript">
         var att = document.querySelector('#att');
@@ -72,10 +93,10 @@
         var cdmg = document.querySelector('#cdmg');
         var bdmg = document.querySelector('#bdmg');
         var comp = document.querySelector('#comp');
-        att.addEventListener("click", function (){
-        var baseDmg = att.value*cri.value*cdmg.value;
-        alert('baseDmg.value');
-    	});
+        comp.addEventListener("click", function () {
+            var baseDmg = document.querySelector('#baseDmg');
+            baseDmg.value = att.value * cri.value * cdmg.value;
+        });
     </script>
 </body>
 
