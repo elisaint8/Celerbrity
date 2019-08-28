@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>데미지계산기</title>
     <style>
         body {
             margin: 20px;
@@ -15,8 +15,9 @@
         }
 
         .stat {
-            width: 200px;
-            block-size: 50px;
+            font-size: 13px;
+            width: 240px;
+            block-size: 35px;
             display: inline-block;
         }
 
@@ -43,14 +44,17 @@
         <div class="stat">
             <label class="lblStatName" for="att">공격력</label>
             <input type="text" class="inputStat" name="att" id="att">
+            
         </div>
         <div class="stat">
             <label class="lblStatName" for="cri">치명타확률</label>
             <input type="text" class="inputStat" name="cri" id="cri">
+
         </div>
         <div class="stat">
             <label class="lblStatName" for="cdmg">치명타데미지</label>
             <input type="text" class="inputStat" name="cdmg" id="cdmg">
+            %
         </div>
         <div class="stat">
             <label class="lblStatName" for="dmg">데미지</label>
@@ -82,6 +86,14 @@
         <label class="lblStatName" for="buffAttR">%공격력</label>
         <input type="text" class="inputStat" name="buffAttR" id="buffAttR">
     </div>
+    <div class="stat">
+        <label class="lblStatName" for="buffCriR">치명타확률</label>
+        <input type="text" class="inputStat" name="buffCriR" id="buffCriR">
+    </div>
+    <div class="stat">
+        <label class="lblStatName" for="buffCriDR">치명타데미지</label>
+        <input type="text" class="inputStat" name="buffCriDR" id="buffCriDR">
+    </div>
 </div>
     <div>
         <input type="button" class="btnComp" name="comp" id="comp" value="완료">
@@ -93,6 +105,8 @@
         var cdmg = document.querySelector('#cdmg');
         var bdmg = document.querySelector('#bdmg');
         var comp = document.querySelector('#comp');
+
+        var buffAtt = document.querySelector('#buffAttR')
         comp.addEventListener("click", function () {
             var baseDmg = document.querySelector('#baseDmg');
             baseDmg.value = att.value * cri.value * cdmg.value;
