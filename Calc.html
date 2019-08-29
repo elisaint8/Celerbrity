@@ -43,7 +43,8 @@
         </div>
         <div class="stat">
             <label class="lblStatName" for="att">공격력</label>
-            <input type="text" class="inputStat" name="att" id="att">
+            <input type="text" class="inputStat" name="att" id="att" onblur="">
+            <input type="text" class="inputStat" name="att" id="att" readonly>
             
         </div>
         <div class="stat">
@@ -74,6 +75,10 @@
         </div>
     </div>
     <div>
+        <input type="button" value="캐릭터 스탯 계산">
+        <input type="text" readonly>
+    </div>
+    <div>
         <label>
             <h3>버프 스탯</h3>
         </label>
@@ -100,17 +105,29 @@
         <input type="text" readonly class="baseDmg" name="baseDmg" id="baseDmg" value="초기벨류">
     </div>
     <script type="text/javascript">
+        var changeStat = document.getElementsByClassName("inputStat");
         var att = document.querySelector('#att');
         var cri = document.querySelector('#cri');
         var cdmg = document.querySelector('#cdmg');
         var bdmg = document.querySelector('#bdmg');
         var comp = document.querySelector('#comp');
+        var baseDmg = document.querySelector('#baseDmg');
 
+        var autoCal = document.querySelector('.lblStatName');
         var buffAtt = document.querySelector('#buffAttR')
-        comp.addEventListener("click", function () {
-            var baseDmg = document.querySelector('#baseDmg');
+        comp.addEventListener("click" , function () {
+
             baseDmg.value = att.value * cri.value * cdmg.value;
         });
+        array.forEach(element => {
+            
+        });
+        changeStat.addEventListener("click", function () {
+            baseDmg.value = att.value * cri.value * cdmg.value;           
+        });
+        function calcStat(){
+
+        }
     </script>
 </body>
 
