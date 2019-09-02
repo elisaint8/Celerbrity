@@ -6,26 +6,26 @@
     <title>데미지계산기</title>
     <style>
         body {
-            margin: 20px;
-            padding: 20px;
+            margin: 10px;
+            padding: 10px;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             background: #b8aaf9;
             border-style: inset;
-            width: 500px;
         }
 
         .stat {
             font-size: 13px;
             width: 240px;
-            block-size: 35px;
-            display: inline-block;
+            block-size: 30px;
+            display: block;
+            
         }
 
         .lblStatName {
             display: inline-block;
             width: 100px;
             border: 1px;
-
+            vertical-align: middle;
         }
 
         .inputStat {
@@ -41,6 +41,11 @@
                 <h3>캐릭터 스탯</h3>
             </label>
         </div>
+        <div>
+            <label class="lblStatName" for="att">스탯이름</label>
+            <label class="inputStat" for="att">입력칸</label>
+            <label class="inputStat" for="att">적용값</label>           
+        </div>
         <div class="stat">
             <label class="lblStatName" for="att">공격력</label>
             <input type="text" class="inputStat" name="att" id="att" onblur="">
@@ -50,7 +55,7 @@
         <div class="stat">
             <label class="lblStatName" for="cri">치명타확률</label>
             <input type="text" class="inputStat" name="cri" id="cri">
-
+            <input type="text" class="inputStat" name="cri" id="cri" readonly >%
         </div>
         <div class="stat">
             <label class="lblStatName" for="cdmg">치명타데미지</label>
