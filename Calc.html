@@ -50,50 +50,46 @@
             </label>
         </div>
         <div>
-            <label class="lblStatName" for="att">스탯이름</label>
-            <label class="lblStatName" for="att">입력칸</label>
-            <label class="lblStatName" for="att">적용값</label>           
+            <label class="lblStatName" for="stat">스탯이름</label>
+            <label class="lblStatName" for="stat">입력칸</label>
+            <label class="lblStatName" for="stat">적용값</label>           
         </div>
-
-        <div class="stat">
-            <label class="lblStatName" for="att">최대 체력</label>
-            <input type="number" class="inputStat" name="inHp" id="inHp" onblur="">
-            <label class="outputStat" name="outAtt" id="outAtt" readonly>00</label>
-            
-        </div>
-
         <div class="stat">
             <label class="lblStatName" for="att">공격력</label>
-            <input type="number" class="inputStat" name="inAtt" id="inAtt" onblur="">
-            <label class="outputStat" name="outAtt" id="outAtt" readonly>00</label>
-            
+            <input type="number" class="inputStat" name="inAtt" id="inAtt">
+            <label class="outputStat" name="outAtt" id="outAtt" readonly></label>
         </div>
         <div class="stat">
             <label class="lblStatName" for="cri">치명타확률</label>
             <input type="number" class="inputStat" name="inCri" id="inCri">
-            <label class="outputStat" name="outAtt" id="outAtt" readonly>
+            <label class="outputStat" name="outCri" id="outCri" readonly></label>%
         </div>
         <div class="stat">
-            <label class="lblStatName" for="cdmg">치명타데미지</label>
-            <input type="number" class="inputStat" name="cdmg" id="cdmg">
-            %
+            <label class="lblStatName" for="cDmg">치명타데미지</label>
+            <input type="number" class="inputStat" name="inCDmg" id="inCDmg">
+            <label class="outputStat" name="outCDmg" id="outCDmg" readonly>200</label>%
+        </div>
+        <div class="stat">
+            <label class="lblStatName" for="pDmg">방어관통력</label>
+            <input type="number" class="inputStat" name="inPDmg" id="inPDmg">
+            <label class="outputStat" name="outPDmg" id="outPDmg" readonly>0</label>
         </div>
         <div class="stat">
             <label class="lblStatName" for="dmg">데미지</label>
-            <input type="number" class="inputStat" name="dmg" id="cdmg">
+            <input type="number" class="inputStat" name="inADmg" id="inADmg">
+            <label class="outputStat" name="outADmg" id="outADmg" readonly>100</label>%
         </div>
         <div class="stat">
             <label class="lblStatName" for="bdmg">보스데미지</label>
-            <input type="number" class="inputStat" name="bdmg" id="bdmg">
+            <input type="number" class="inputStat" name="inBDmg" id="inBDmg">
+            <label class="outputStat" name="outBDmg" id="outBDmg" readonly>100</label>%
         </div>
         <div class="stat">
             <label class="lblStatName" for="aspd">공격속도</label>
-            <input type="number" class="inputStat" name="aspd" id="aspd">
+            <input type="number" class="inputStat" name="inASpd" id="inASpd">
+            <label class="outputStat" name="outASpd" id="outASpd" readonly>100</label>%
         </div>
-        <div class="stat">
-            <label class="lblStatName" for="def">방어력</label>
-            <input type="number" class="inputStat" name="def" id="def">
-        </div>
+
     </div>
     <div>
         <input type="button" value="캐릭터 스탯 계산">
@@ -106,19 +102,19 @@
     </div>
     <div class="stat">
         <label class="lblStatName" for="buffAttF">고정공격력</label>
-        <input type="text" class="inputStat" name="buffAttF" id="buffAttF">
+        <input type="number" class="inputStat" name="buffAttF" id="buffAttF">
     </div>
     <div class="stat">
         <label class="lblStatName" for="buffAttR">%공격력</label>
-        <input type="text" class="inputStat" name="buffAttR" id="buffAttR">
+        <input type="number" class="inputStat" name="buffAttR" id="buffAttR">
     </div>
     <div class="stat">
         <label class="lblStatName" for="buffCriR">치명타확률</label>
-        <input type="text" class="inputStat" name="buffCriR" id="buffCriR">
+        <input type="number" class="inputStat" name="buffCriR" id="buffCriR">
     </div>
     <div class="stat">
         <label class="lblStatName" for="buffCriDR">치명타데미지</label>
-        <input type="text" class="inputStat" name="buffCriDR" id="buffCriDR">
+        <input type="number" class="inputStat" name="buffCriDR" id="buffCriDR">
     </div>
 </div>
     <div>
@@ -126,6 +122,9 @@
         <input type="text" readonly class="baseDmg" name="baseDmg" id="baseDmg" value="초기벨류">
     </div>
     <script type="text/javascript">
+
+        
+
         var changeStatClass = document.getElementsByClassName("inputStat");
 
         var att = document.querySelector('#inAtt');
@@ -135,21 +134,43 @@
         var comp = document.querySelector('#comp');
         var baseDmg = document.querySelector('#baseDmg');
         
+        var stats = document.querySelectorAll('.outputStat');
+        
         var sol = 'sol'
         var tel = 'tel'
         var plus = `${sol}+asd+${tel}`;
 
         var autoCal = document.querySelector('.lblStatName');
         var buffAtt = document.querySelector('#buffAttR')
+
+        comp.addEventListener("click",calcDmg);
+        
         for(var i = 0; i<changeStatClass.length; i++) {
-            changeStatClass[i].addEventListener("blur",clickBtn)
+            changeStatClass[i].addEventListener("blur",calcStat)
         }
         function clickBtn() {
             baseDmg.value = att.value * cri.value * cdmg.value;           
         }
 
         function calcStat(){
-            a+b
+            document.getElementById("outAtt").innerText = document.getElementById("inAtt").value*1;
+            document.getElementById("outCri").innerText = document.getElementById("inCri").value/10.0;
+            document.getElementById("outCDmg").innerText = document.getElementById("inCDmg").value*1+200;
+            document.getElementById("outPDmg").innerText = document.getElementById("inPDmg").value*1;
+            document.getElementById("outADmg").innerText = document.getElementById("inADmg").value*1+100;
+            document.getElementById("outBDmg").innerText = document.getElementById("inBDmg").value*1+100;
+            document.getElementById("outASpd").innerText = document.getElementById("inASpd").value*1+100;
+            
+        }
+        var totAtt
+        function calcDmg(){
+            totAtt = stats
+        }
+
+        function deadCode(){
+            document.getElementById("outHp").innerText = document.getElementById("inHp").value;
+            document.getElementById("outPDef").innerText = document.getElementById("inPDef").value;
+            document.getElementById("outMDef").innerText = document.getElementById("inMDef").value;
         }
     </script>
 </body>
