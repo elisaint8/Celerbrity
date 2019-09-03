@@ -36,6 +36,8 @@
 
         .outputStat {
             width: 60px;
+            text-align: right;
+            display: inline-block;
         }
     </style>
 </head>
@@ -49,19 +51,27 @@
         </div>
         <div>
             <label class="lblStatName" for="att">스탯이름</label>
-            <label class="inputStat" for="att">입력칸</label>
-            <label class="inputStat" for="att">적용값</label>           
+            <label class="lblStatName" for="att">입력칸</label>
+            <label class="lblStatName" for="att">적용값</label>           
         </div>
+
+        <div class="stat">
+            <label class="lblStatName" for="att">최대 체력</label>
+            <input type="number" class="inputStat" name="inHp" id="inHp" onblur="">
+            <label class="outputStat" name="outAtt" id="outAtt" readonly>00</label>
+            
+        </div>
+
         <div class="stat">
             <label class="lblStatName" for="att">공격력</label>
-            <input type="number" class="inputStat" name="att" id="att" onblur="">
-            <input type="number" class="outputStat" name="att" id="att" readonly>
+            <input type="number" class="inputStat" name="inAtt" id="inAtt" onblur="">
+            <label class="outputStat" name="outAtt" id="outAtt" readonly>00</label>
             
         </div>
         <div class="stat">
             <label class="lblStatName" for="cri">치명타확률</label>
-            <input type="number" class="inputStat" name="cri" id="cri">
-            <input type="number" class="outputStat" name="cri" id="cri" readonly >%
+            <input type="number" class="inputStat" name="inCri" id="inCri">
+            <label class="outputStat" name="outAtt" id="outAtt" readonly>
         </div>
         <div class="stat">
             <label class="lblStatName" for="cdmg">치명타데미지</label>
@@ -116,28 +126,30 @@
         <input type="text" readonly class="baseDmg" name="baseDmg" id="baseDmg" value="초기벨류">
     </div>
     <script type="text/javascript">
-        var changeStat = document.getElementsByClassName("inputStat");
-        var att = document.querySelector('#att');
-        var cri = document.querySelector('#cri');
+        var changeStatClass = document.getElementsByClassName("inputStat");
+
+        var att = document.querySelector('#inAtt');
+        var cri = document.querySelector('#inCri');
         var cdmg = document.querySelector('#cdmg');
         var bdmg = document.querySelector('#bdmg');
         var comp = document.querySelector('#comp');
         var baseDmg = document.querySelector('#baseDmg');
+        
+        var sol = 'sol'
+        var tel = 'tel'
+        var plus = `${sol}+asd+${tel}`;
 
         var autoCal = document.querySelector('.lblStatName');
         var buffAtt = document.querySelector('#buffAttR')
-        comp.addEventListener("click" , function () {
-
-            baseDmg.value = att.value * cri.value * cdmg.value;
-        });
-        array.forEach(element => {
-            
-        });
-        changeStat.addEventListener("click", function () {
+        for(var i = 0; i<changeStatClass.length; i++) {
+            changeStatClass[i].addEventListener("blur",clickBtn)
+        }
+        function clickBtn() {
             baseDmg.value = att.value * cri.value * cdmg.value;           
-        });
-        function calcStat(){
+        }
 
+        function calcStat(){
+            a+b
         }
     </script>
 </body>
