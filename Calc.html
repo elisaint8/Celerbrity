@@ -17,7 +17,7 @@
 
         .stat {
             font-size: 13px;
-            width: 240px;
+            width: 300px;
             block-size: 30px;
             display: block;
             
@@ -31,6 +31,10 @@
         }
 
         .inputStat {
+            width: 60px;
+        }
+
+        .outputStat {
             width: 60px;
         }
     </style>
@@ -51,34 +55,34 @@
         <div class="stat">
             <label class="lblStatName" for="att">공격력</label>
             <input type="number" class="inputStat" name="att" id="att" onblur="">
-            <input type="number" class="inputStat" name="att" id="att" readonly>
+            <input type="number" class="outputStat" name="att" id="att" readonly>
             
         </div>
         <div class="stat">
             <label class="lblStatName" for="cri">치명타확률</label>
-            <input type="text" class="inputStat" name="cri" id="cri">
-            <input type="text" class="inputStat" name="cri" id="cri" readonly >%
+            <input type="number" class="inputStat" name="cri" id="cri">
+            <input type="number" class="outputStat" name="cri" id="cri" readonly >%
         </div>
         <div class="stat">
             <label class="lblStatName" for="cdmg">치명타데미지</label>
-            <input type="text" class="inputStat" name="cdmg" id="cdmg">
+            <input type="number" class="inputStat" name="cdmg" id="cdmg">
             %
         </div>
         <div class="stat">
             <label class="lblStatName" for="dmg">데미지</label>
-            <input type="text" class="inputStat" name="dmg" id="cdmg">
+            <input type="number" class="inputStat" name="dmg" id="cdmg">
         </div>
         <div class="stat">
             <label class="lblStatName" for="bdmg">보스데미지</label>
-            <input type="text" class="inputStat" name="bdmg" id="bdmg">
+            <input type="number" class="inputStat" name="bdmg" id="bdmg">
         </div>
         <div class="stat">
             <label class="lblStatName" for="aspd">공격속도</label>
-            <input type="text" class="inputStat" name="aspd" id="aspd">
+            <input type="number" class="inputStat" name="aspd" id="aspd">
         </div>
         <div class="stat">
             <label class="lblStatName" for="def">방어력</label>
-            <input type="text" class="inputStat" name="def" id="def">
+            <input type="number" class="inputStat" name="def" id="def">
         </div>
     </div>
     <div>
