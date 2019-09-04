@@ -39,6 +39,12 @@
             text-align: right;
             display: inline-block;
         }
+
+        .buffStat {
+            width: 60px;
+            text-align: right;
+            display: inline-block;
+        }
     </style>
 </head>
 
@@ -49,7 +55,7 @@
                 <h3>캐릭터 스탯</h3>
             </label>
         </div>
-        <div>
+        <div style="padding-bottom: 10px;">
             <label class="lblStatName" for="stat">스탯이름</label>
             <label class="lblStatName" for="stat">입력칸</label>
             <label class="lblStatName" for="stat">적용값</label>           
@@ -57,12 +63,12 @@
         <div class="stat">
             <label class="lblStatName" for="att">공격력</label>
             <input type="number" class="inputStat" name="inAtt" id="inAtt">
-            <label class="outputStat" name="outAtt" id="outAtt" readonly></label>
+            <label class="outputStat" name="outAtt" id="outAtt" readonly>0</label>
         </div>
         <div class="stat">
             <label class="lblStatName" for="cri">치명타확률</label>
             <input type="number" class="inputStat" name="inCri" id="inCri">
-            <label class="outputStat" name="outCri" id="outCri" readonly></label>%
+            <label class="outputStat" name="outCri" id="outCri" readonly>0</label>%
         </div>
         <div class="stat">
             <label class="lblStatName" for="cDmg">치명타데미지</label>
@@ -92,39 +98,55 @@
 
     </div>
     <div>
-        <input type="button" value="캐릭터 스탯 계산">
-        <input type="text" readonly>
-    </div>
-    <div>
         <label>
             <h3>버프 스탯</h3>
         </label>
     </div>
     <div class="stat">
-        <label class="lblStatName" for="buffAttF">고정공격력</label>
-        <input type="number" class="inputStat" name="buffAttF" id="buffAttF">
+        <label class="lblStatName" for="attM">% 공격력</label>
+        <input type="number" class="inputStat" name="inAttM" id="inAttM">%
+        <label class="buffStat" name="outAttM" id="outAttM" readonly>0</label>%
     </div>
     <div class="stat">
-        <label class="lblStatName" for="buffAttR">%공격력</label>
-        <input type="number" class="inputStat" name="buffAttR" id="buffAttR">
+        <label class="lblStatName" for="attF">고정공격력</label>
+        <input type="number" class="inputStat" name="inAttF" id="inAttF">
+        + <label class="buffStat" name="outAttF" id="outAttF" readonly>0</label>
     </div>
     <div class="stat">
-        <label class="lblStatName" for="buffCriR">치명타확률</label>
-        <input type="number" class="inputStat" name="buffCriR" id="buffCriR">
+        <label class="lblStatName" for="criF">치명타확률</label>
+        <input type="number" class="inputStat" name="inCriF" id="inCriF">
+        + <label class="buffStat" name="outCriF" id="outCriF" readonly>0</label>%
     </div>
     <div class="stat">
-        <label class="lblStatName" for="buffCriDR">치명타데미지</label>
-        <input type="number" class="inputStat" name="buffCriDR" id="buffCriDR">
+        <label class="lblStatName" for="cDmg">치명타데미지</label>
+        <input type="number" class="inputStat" name="inCDmgF" id="inCDmgF">
+        + <label class="buffStat" name="outCDmgF" id="outCDmgF" readonly>0</label>%
     </div>
 </div>
     <div>
-        <input type="button" class="btnComp" name="comp" id="comp" value="완료">
-        <input type="text" readonly class="baseDmg" name="baseDmg" id="baseDmg" value="초기벨류">
+        <input type="button" class="btnComp" name="comp" id="comp" value="완료"><br>
+        최종 공격력
+        <input type="text" readonly class="totStat" name="totAtt" id="totAtt" value="0">
+    </div>
+    <div>
+        최종 크리티컬 확률
+        <input type="text" readonly class="totStat" name="totCri" id="totCri" value="0">
+    </div>
+    <div>
+        최종 데미지 증가
+        <input type="text" readonly class="totStat" name="totCri" id="totCri" value="0">
+    </div>
+    <div>
+        최종 보스데미지 증가
+        <input type="text" readonly class="totStat" name="totCri" id="totCri" value="0">
+    </div>
+    <div>
+        <input type="button" value="캐릭터 스탯 계산">
+        <input type="text" readonly>
     </div>
     <script type="text/javascript">
 
         
-
         var changeStatClass = document.getElementsByClassName("inputStat");
 
         var att = document.querySelector('#inAtt');
@@ -132,7 +154,7 @@
         var cdmg = document.querySelector('#cdmg');
         var bdmg = document.querySelector('#bdmg');
         var comp = document.querySelector('#comp');
-        var baseDmg = document.querySelector('#baseDmg');
+        var totAtt = document.querySelector('#totAtt');
         
         var stats = document.querySelectorAll('.outputStat');
         
@@ -144,14 +166,10 @@
         var buffAtt = document.querySelector('#buffAttR')
 
         comp.addEventListener("click",calcDmg);
-        
+        //입력칸들에게 이벤트리스너 등록
         for(var i = 0; i<changeStatClass.length; i++) {
             changeStatClass[i].addEventListener("blur",calcStat)
         }
-        function clickBtn() {
-            baseDmg.value = att.value * cri.value * cdmg.value;           
-        }
-
         function calcStat(){
             document.getElementById("outAtt").innerText = document.getElementById("inAtt").value*1;
             document.getElementById("outCri").innerText = document.getElementById("inCri").value/10.0;
@@ -160,7 +178,14 @@
             document.getElementById("outADmg").innerText = document.getElementById("inADmg").value*1+100;
             document.getElementById("outBDmg").innerText = document.getElementById("inBDmg").value*1+100;
             document.getElementById("outASpd").innerText = document.getElementById("inASpd").value*1+100;
-            
+            document.getElementById("outAttM").innerText = document.getElementById("inAttM").value*1+100;
+            document.getElementById("outAttF").innerText = document.getElementById("inAttF").value*1;
+            document.getElementById("outCriF").innerText = document.getElementById("inCriF").value*1;
+            document.getElementById("outCDmgF").innerText = document.getElementById("inCDmgF").value*1;
+            document.getElementById("totAtt").value = document.getElementById("outAtt").innerText * document.getElementById("outAttM").innerText + document.getElementById("outAttF").innerText*1;
+        }
+        function clickBtn() {
+            totAtt.value = att.value * cri.value * cdmg.value;           
         }
         var totAtt
         function calcDmg(){
