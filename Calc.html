@@ -25,7 +25,7 @@
 
         .lblStatName {
             display: inline-block;
-            width: 100px;
+            width: 130px;
             border: 1px;
             vertical-align: middle;
         }
@@ -44,6 +44,10 @@
             width: 60px;
             text-align: right;
             display: inline-block;
+        }
+
+        .totStat {
+            width: 80px;
         }
     </style>
 </head>
@@ -118,27 +122,33 @@
         + <label class="buffStat" name="outCriF" id="outCriF" readonly>0</label>%
     </div>
     <div class="stat">
-        <label class="lblStatName" for="cDmg">치명타데미지</label>
+        <label class="lblStatName" for="cDmgF">치명타데미지</label>
         <input type="number" class="inputStat" name="inCDmgF" id="inCDmgF">
         + <label class="buffStat" name="outCDmgF" id="outCDmgF" readonly>0</label>%
     </div>
+    <div class="stat">
+            <label class="lblStatName" for="bDmgF">보스데미지</label>
+            <input type="number" class="inputStat" name="inBDmgF" id="inBDmgF">
+            + <label class="buffStat" name="outBDmgF" id="outBDmgF" readonly>0</label>%
+        </div>
 </div>
-    <div>
-        <input type="button" class="btnComp" name="comp" id="comp" value="완료"><br>
-        최종 공격력
+
+<input type="button" class="btnComp" name="comp" id="comp" value="완료"><br>
+    <div class="stat">
+        <label class="lblStatName" for="totAtt">최종 공격력</label> 
         <input type="text" readonly class="totStat" name="totAtt" id="totAtt" value="0">
     </div>
-    <div>
-        최종 크리티컬 확률
+    <div class="stat">
+        <label class="lblStatName" for="totCri">최종 크리티컬 확률</label>
         <input type="text" readonly class="totStat" name="totCri" id="totCri" value="0">
     </div>
-    <div>
-        최종 데미지 증가
-        <input type="text" readonly class="totStat" name="totCri" id="totCri" value="0">
+    <div class="stat">
+        <label class="lblStatName" for="totADmg">최종 데미지 증가</label>
+        <input type="text" readonly class="totStat" name="totADmg" id="totADmg" value="0">
     </div>
-    <div>
-        최종 보스데미지 증가
-        <input type="text" readonly class="totStat" name="totCri" id="totCri" value="0">
+    <div class="stat">
+            <label class="lblStatName" for="totBDmg">최종 보스데미지 증가</label>
+        <input type="text" readonly class="totStat" name="totBDmg" id="totBDmg" value="0">
     </div>
     <div>
         <input type="button" value="캐릭터 스탯 계산">
@@ -146,21 +156,34 @@
     </div>
     <script type="text/javascript">
 
-        
-        var changeStatClass = document.getElementsByClassName("inputStat");
+       //참고 사이트들
+       //https://gall.dcinside.com/mgallery/board/view/?id=vespa&no=599196&exception_mode=recommend&search_pos=-604002&s_type=search_all&s_keyword=%EA%B3%B5%EC%8B%9D&page=1
+       //https://gall.dcinside.com/mgallery/board/view/?id=vespa&no=554178&exception_mode=recommend&search_pos=-556275&s_type=search_all&s_keyword=%EB%B0%A9%EA%B4%80&page=1
+       //https://github.com/duckness/Mask-of-Goblin/blob/master/src/mixins/softcap.js
+       //https://cafe.naver.com/kingsraid/736718 // 방어력 공식
+       var changeStatClass = document.getElementsByClassName("inputStat");
 
-        var att = document.querySelector('#inAtt');
-        var cri = document.querySelector('#inCri');
-        var cdmg = document.querySelector('#cdmg');
-        var bdmg = document.querySelector('#bdmg');
-        var comp = document.querySelector('#comp');
-        var totAtt = document.querySelector('#totAtt');
+        var att = document.getElementById("outAtt");
+        var cri = document.getElementById("outCri");
+        var cDmg = document.getElementById("outCDmg");
+        var pDmg = document.getElementById("outPDmg");
+        var aDmg = document.getElementById("outADmg");
+        var bDmg = document.getElementById("outBDmg");
+        var aSpd = document.getElementById("outASpd");
+        var attM = document.getElementById("outAttM");
+        var attF = document.getElementById("outAttF");
+        var criF = document.getElementById("outCriF");
+        var cDmgF = document.getElementById("outCDmgF");
+        var bDmgF = document.getElementById("outBDmgF");
+
+
+        var totAtt = document.getElementById("totAtt");
+        var totCri = document.getElementById("totCri");
+        var totCDmg = document.getElementById("totCDmg");
+        var totBDmg = document.getElementById("totBDmg");
         
         var stats = document.querySelectorAll('.outputStat');
-        
-        var sol = 'sol'
-        var tel = 'tel'
-        var plus = `${sol}+asd+${tel}`;
+
 
         var autoCal = document.querySelector('.lblStatName');
         var buffAtt = document.querySelector('#buffAttR')
@@ -171,21 +194,24 @@
             changeStatClass[i].addEventListener("blur",calcStat)
         }
         function calcStat(){
-            document.getElementById("outAtt").innerText = document.getElementById("inAtt").value*1;
-            document.getElementById("outCri").innerText = document.getElementById("inCri").value/10.0;
-            document.getElementById("outCDmg").innerText = document.getElementById("inCDmg").value*1+200;
-            document.getElementById("outPDmg").innerText = document.getElementById("inPDmg").value*1;
-            document.getElementById("outADmg").innerText = document.getElementById("inADmg").value*1+100;
-            document.getElementById("outBDmg").innerText = document.getElementById("inBDmg").value*1+100;
-            document.getElementById("outASpd").innerText = document.getElementById("inASpd").value*1+100;
-            document.getElementById("outAttM").innerText = document.getElementById("inAttM").value*1+100;
-            document.getElementById("outAttF").innerText = document.getElementById("inAttF").value*1;
-            document.getElementById("outCriF").innerText = document.getElementById("inCriF").value*1;
-            document.getElementById("outCDmgF").innerText = document.getElementById("inCDmgF").value*1;
-            document.getElementById("totAtt").value = document.getElementById("outAtt").innerText * document.getElementById("outAttM").innerText + document.getElementById("outAttF").innerText*1;
+            att.innerText = document.getElementById("inAtt").value*1;
+            cri.innerText = document.getElementById("inCri").value/10.0;
+            cDmg.innerText = document.getElementById("inCDmg").value*1+200;
+            pDmg.innerText = document.getElementById("inPDmg").value*1;
+            aDmg.innerText = document.getElementById("inADmg").value*1+100;
+            bDmg.innerText = document.getElementById("inBDmg").value*1+100;
+            aSpd.innerText = document.getElementById("inASpd").value*1+100;
+            attM.innerText = document.getElementById("inAttM").value*1+100;
+            attF.innerText = document.getElementById("inAttF").value*1;
+            criF.innerText = document.getElementById("inCriF").value*1;
+            cDmgF.innerText = document.getElementById("inCDmgF").value*1;
+            bDmgF.innerText = document.getElementById("inBDmgF").value*1;
+            totAtt.value = att.innerText * attM.innerText / 100 + attF.innerText*1;
+            totCri
+            
         }
         function clickBtn() {
-            totAtt.value = att.value * cri.value * cdmg.value;           
+            totAtt.value = att.innerText;           
         }
         var totAtt
         function calcDmg(){
