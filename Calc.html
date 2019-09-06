@@ -171,7 +171,8 @@
         <div class="stat">
             <label class="lblStatName" for="attM">% 공격력</label>
             <input type="number" class="inputStat" name="inAttM" id="inAttM">
-            <label class="oper">+</label> <label class="outputStat" name="outAttM" id="outAttM" readonly>0</label>
+            <label class="oper">+</label>
+            <label class="outputStat" name="outAttM" id="outAttM" readonly>0</label>
             <label class="oper">%</label>
         </div>
         <div class="stat">
@@ -180,21 +181,31 @@
             <label class="oper">+</label> <label class="outputStat" name="outAttF" id="outAttF" readonly>0</label>
         </div>
         <div class="stat">
+                <label class="lblStatName" for="attC">클래스공격력</label>
+                <input type="number" class="inputStat" name="inAttC" id="inAttC">
+                <label class="oper">+</label>
+                <label class="outputStat" name="outAttC" id="outAttC" readonly>0</label>
+                <label class="oper">%</label>
+        </div>
+        <div class="stat">
             <label class="lblStatName" for="criF">치명타확률</label>
             <input type="number" class="inputStat" name="inCriF" id="inCriF">
-            <label class="oper">+</label> <label class="outputStat" name="outCriF" id="outCriF" readonly>0</label>
+            <label class="oper">+</label>
+            <label class="outputStat" name="outCriF" id="outCriF" readonly>0</label>
             <label class="oper">%</label>
         </div>
         <div class="stat">
             <label class="lblStatName" for="cDmgF">치명타데미지</label>
             <input type="number" class="inputStat" name="inCDmgF" id="inCDmgF">
-            <label class="oper">+</label> <label class="outputStat" name="outCDmgF" id="outCDmgF" readonly>0</label>
+            <label class="oper">+</label>
+            <label class="outputStat" name="outCDmgF" id="outCDmgF" readonly>0</label>
             <label class="oper">%</label>
         </div>
         <div class="stat">
             <label class="lblStatName" for="bDmgF">보스데미지</label>
             <input type="number" class="inputStat" name="inBDmgF" id="inBDmgF">
-            <label class="oper">+</label> <label class="outputStat" name="outBDmgF" id="outBDmgF" readonly>0</label>
+            <label class="oper">+</label>
+            <label class="outputStat" name="outBDmgF" id="outBDmgF" readonly>0</label>
             <label class="oper">%</label>
         </div>
     </div>
@@ -311,6 +322,7 @@
         //버프 스탯
         var attM = document.getElementById("outAttM");
         var attF = document.getElementById("outAttF");
+        var attC = document.getElementById("outAttC");
         var criF = document.getElementById("outCriF");
         var cDmgF = document.getElementById("outCDmgF");
         var bDmgF = document.getElementById("outBDmgF");
@@ -333,8 +345,8 @@
         var stats = document.querySelectorAll('.outputStat');
 
 
-        var autoCal = document.querySelector('.lblStatName');
-        var buffAtt = document.querySelector('#buffAttR')
+        // var autoCal = document.querySelector('.lblStatName');
+        // var buffAtt = document.querySelector('#buffAttR')
 
         comp.addEventListener("click",calcDmg);
         //입력칸들에게 이벤트리스너 등록
@@ -342,6 +354,7 @@
             changeStatClass[i].addEventListener("blur",calcStat)
         }
         function calcStat(){
+            //캐릭터 스탯
             att.innerText = document.getElementById("inAtt").value*1;
             cri.innerText = document.getElementById("inCri").value/10;
             cDmg.innerText = document.getElementById("inCDmg").value*1+200;
@@ -350,17 +363,21 @@
             bDmg.innerText = document.getElementById("inBDmg").value*1+100;
             aSpd.innerText = document.getElementById("inASpd").value*1+100;
 
+            //버프 스탯
             attM.innerText = document.getElementById("inAttM").value*1+100;
             attF.innerText = document.getElementById("inAttF").value*1;
+            attC.innerText = document.getElementById("inAttC").value*1;
             criF.innerText = document.getElementById("inCriF").value/10;
             cDmgF.innerText = document.getElementById("inCDmgF").value*1;
             bDmgF.innerText = document.getElementById("inBDmgF").value*1;
 
+            //적 스탯
             increADmg.innerText = document.getElementById("inIncreADmg").value*1+100;
             increPDmg.innerText = document.getElementById("inIncrePDmg").value*1+100;
             increMDmg.innerText = document.getElementById("inIncreMDmg").value*1+100;
             eDef.innerText = document.getElementById("inEDef").value*1;
 
+            //최종 스탯
             totAtt.value = Math.round(att.innerText * attM.innerText / 100 + attF.innerText*1);
             totCri.value = Math.min(Math.round(cri.innerText * 1 + criF.innerText * 1),100) ;
             totCDmg.value = Math.round(cDmg.innerText * 1 + cDmgF.innerText * 1);
