@@ -11,13 +11,21 @@
             margin: 10px;
             padding: 10px;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            background: #b8aaf9;
+            background: #c7ddf7;
+            border-color: rgb(3, 243, 243);
             border-style: inset;
         }
-
+        h3 {
+            color:rgb(0, 48, 77)
+        }
+        hr {
+            border-color: rgb(9, 180, 180);
+            border-width: 2px;
+            border-style: solid;
+        }
         .stat {
             font-size: 13px;
-            width: 300px;
+            width: 320px;
             block-size: 30px;
             display: block;
             
@@ -25,44 +33,95 @@
 
         .lblStatName {
             display: inline-block;
+            font-size: 9pt;
             width: 130px;
+            border: 1px;
+            vertical-align: middle;
+        }
+        .lblSubName1{
+            display: inline-block;
+            width: 133px;
+            border: 1px;
+            vertical-align: middle;
+        }
+        .lblSubName2 {
+            display: inline-block;
+            width: 83px;
+            border: 1px;
+            vertical-align: middle;
+        }
+        .lblSubName3 {
+            display: inline-block;
+            width: 83px;
             border: 1px;
             vertical-align: middle;
         }
 
         .inputStat {
             width: 60px;
+            text-align: right;
+            margin-right: 20px;
+            border-style: solid;
+            border-radius: 5px;
+            background-color: rgb(153, 245, 214);
+            color: rgb(9, 124, 190);
         }
 
         .outputStat {
             width: 60px;
             text-align: right;
+            font-size: 10pt;
             display: inline-block;
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 5px;
+            background-color: rgb(196, 246, 248);
+            color: rgb(46, 128, 235);
         }
 
         .buffStat {
             width: 60px;
             text-align: right;
             display: inline-block;
+            border-style: solid;
+            border-radius: 5px;
+            background-color: rgb(196, 246, 248);
+            color: rgb(46, 128, 235);
         }
 
         .totStat {
-            width: 80px;
+            width: 70px;
+            text-align: right;
+            border-style: solid;
+            border-radius: 5px;
+            background-color: rgb(196, 246, 248);
+            color: rgb(46, 128, 235);
+        }
+        .totDmg {
+            width: 150px;
+            text-align: right;
+            border-style: solid;
+            border-radius: 5px;
+            background-color: rgb(196, 246, 248);
+            color: rgb(46, 128, 235);
+        }
+        .oper {
+            font-size: 10pt;
+            color: rgb(46, 128, 235);
         }
     </style>
 </head>
 
 <body>
-    <div>
-        <div>
-            <label>
-                <h3>캐릭터 스탯</h3>
-            </label>
-        </div>
+<form>
+    <div name="cStat">
+        <label>
+            <h3>* 캐릭터 스탯</h3>
+        </label>
         <div style="padding-bottom: 10px;">
-            <label class="lblStatName" for="stat">스탯이름</label>
-            <label class="lblStatName" for="stat">입력칸</label>
-            <label class="lblStatName" for="stat">적용값</label>           
+            <label class="lblSubName1" for="stat">스탯이름</label>
+            <label class="lblSubName2" for="stat">입력칸</label>
+            <label class="lblSubName3" for="stat">적용값</label>           
         </div>
         <div class="stat">
             <label class="lblStatName" for="att">공격력</label>
@@ -72,12 +131,14 @@
         <div class="stat">
             <label class="lblStatName" for="cri">치명타확률</label>
             <input type="number" class="inputStat" name="inCri" id="inCri">
-            <label class="outputStat" name="outCri" id="outCri" readonly>0</label>%
+            <label class="outputStat" name="outCri" id="outCri" readonly>0</label>
+            <label class="oper">%</label>
         </div>
         <div class="stat">
             <label class="lblStatName" for="cDmg">치명타데미지</label>
             <input type="number" class="inputStat" name="inCDmg" id="inCDmg">
-            <label class="outputStat" name="outCDmg" id="outCDmg" readonly>200</label>%
+            <label class="outputStat" name="outCDmg" id="outCDmg" readonly>200</label>
+            <label class="oper">%</label>
         </div>
         <div class="stat">
             <label class="lblStatName" for="pDmg">방어관통력</label>
@@ -87,73 +148,148 @@
         <div class="stat">
             <label class="lblStatName" for="dmg">데미지</label>
             <input type="number" class="inputStat" name="inADmg" id="inADmg">
-            <label class="outputStat" name="outADmg" id="outADmg" readonly>100</label>%
+            <label class="outputStat" name="outADmg" id="outADmg" readonly>100</label>
+            <label class="oper">%</label>
         </div>
         <div class="stat">
             <label class="lblStatName" for="bdmg">보스데미지</label>
             <input type="number" class="inputStat" name="inBDmg" id="inBDmg">
-            <label class="outputStat" name="outBDmg" id="outBDmg" readonly>100</label>%
+            <label class="outputStat" name="outBDmg" id="outBDmg" readonly>100</label>
+            <label class="oper">%</label>
         </div>
         <div class="stat">
             <label class="lblStatName" for="aspd">공격속도</label>
             <input type="number" class="inputStat" name="inASpd" id="inASpd">
-            <label class="outputStat" name="outASpd" id="outASpd" readonly>100</label>%
+            <label class="outputStat" name="outASpd" id="outASpd" readonly>100</label>
+            <label class="oper">%</label>
         </div>
-
     </div>
-    <div>
-        <label>
-            <h3>버프 스탯</h3>
-        </label>
-    </div>
-    <div class="stat">
-        <label class="lblStatName" for="attM">% 공격력</label>
-        <input type="number" class="inputStat" name="inAttM" id="inAttM">%
-        <label class="buffStat" name="outAttM" id="outAttM" readonly>0</label>%
-    </div>
-    <div class="stat">
-        <label class="lblStatName" for="attF">고정공격력</label>
-        <input type="number" class="inputStat" name="inAttF" id="inAttF">
-        + <label class="buffStat" name="outAttF" id="outAttF" readonly>0</label>
-    </div>
-    <div class="stat">
-        <label class="lblStatName" for="criF">치명타확률</label>
-        <input type="number" class="inputStat" name="inCriF" id="inCriF">
-        + <label class="buffStat" name="outCriF" id="outCriF" readonly>0</label>%
-    </div>
-    <div class="stat">
-        <label class="lblStatName" for="cDmgF">치명타데미지</label>
-        <input type="number" class="inputStat" name="inCDmgF" id="inCDmgF">
-        + <label class="buffStat" name="outCDmgF" id="outCDmgF" readonly>0</label>%
-    </div>
-    <div class="stat">
+    <div name="bStat">
+    <label>
+        <h3>* 버프 스탯</h3>
+    </label>
+        <div class="stat">
+            <label class="lblStatName" for="attM">% 공격력</label>
+            <input type="number" class="inputStat" name="inAttM" id="inAttM">
+            <label class="oper">+</label> <label class="outputStat" name="outAttM" id="outAttM" readonly>0</label>
+            <label class="oper">%</label>
+        </div>
+        <div class="stat">
+            <label class="lblStatName" for="attF">고정공격력</label>
+            <input type="number" class="inputStat" name="inAttF" id="inAttF">
+            <label class="oper">+</label> <label class="outputStat" name="outAttF" id="outAttF" readonly>0</label>
+        </div>
+        <div class="stat">
+            <label class="lblStatName" for="criF">치명타확률</label>
+            <input type="number" class="inputStat" name="inCriF" id="inCriF">
+            <label class="oper">+</label> <label class="outputStat" name="outCriF" id="outCriF" readonly>0</label>
+            <label class="oper">%</label>
+        </div>
+        <div class="stat">
+            <label class="lblStatName" for="cDmgF">치명타데미지</label>
+            <input type="number" class="inputStat" name="inCDmgF" id="inCDmgF">
+            <label class="oper">+</label> <label class="outputStat" name="outCDmgF" id="outCDmgF" readonly>0</label>
+            <label class="oper">%</label>
+        </div>
+        <div class="stat">
             <label class="lblStatName" for="bDmgF">보스데미지</label>
             <input type="number" class="inputStat" name="inBDmgF" id="inBDmgF">
-            + <label class="buffStat" name="outBDmgF" id="outBDmgF" readonly>0</label>%
+            <label class="oper">+</label> <label class="outputStat" name="outBDmgF" id="outBDmgF" readonly>0</label>
+            <label class="oper">%</label>
         </div>
-</div>
+    </div>
+    <div name="dStat">
+        <label>
+            <h3>* 적 스탯</h3>
+        </label>
+        <div class="stat">
+            <label class="lblStatName" for="increADmg">받는 모든 피해량 증감</label>
+            <input type="number" class="inputStat" name="inIncreADmg" id="inIncreADmg">
+            <label class="oper"></label>
+            <label class="outputStat" name="outIncreADmg" id="outIncreADmg" readonly>100</label>
+            <label class="oper">%</label>
+        </div>
+        <div class="stat">
+            <label class="lblStatName" for="increPDmg">받는 물리 피해량 증감</label>
+            <input type="number" class="inputStat" name="inIncrePDmg" id="inIncrePDmg">
+            <label class="oper"></label>
+            <label class="outputStat" name="outIncrePDmg" id="outIncrePDmg" readonly>100</label>
+            <label class="oper">%</label>
+        </div>
+        <div class="stat">
+            <label class="lblStatName" for="criF">받는 마법 피해량 증감</label>
+            <input type="number" class="inputStat" name="inIncreMDmg" id="inIncreMDmg">
+            <label class="oper"></label>
+            <label class="outputStat" name="outIncreMDmg" id="outIncreMDmg" readonly>100</label>
+            <label class="oper">%</label>
+        </div>
+        <div class="stat">
+            <label class="lblStatName" for="eDef">방어력</label>
+            <input type="number" class="inputStat" name="inEDef" id="inEDef">
+            <label class="oper"></label>
+            <label class="outputStat" name="outEDef" id="outEDef" readonly>0</label>
+            <label class="oper"></label>
+        </div>
+    </div>
 
-<input type="button" class="btnComp" name="comp" id="comp" value="완료"><br>
+    <br>
+    <input type="reset" class="btnComp" name="comp" id="comp" value="재입력"
+    style="color: rgb(0, 48, 77);
+    font-weight: 1000;
+    width:80px;
+    border-radius: 5px;
+    background-color: #298dc7;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    ">
+    <hr>
+    <br>
     <div class="stat">
         <label class="lblStatName" for="totAtt">최종 공격력</label> 
         <input type="text" readonly class="totStat" name="totAtt" id="totAtt" value="0">
+        <label class="oper"></label>
     </div>
     <div class="stat">
-        <label class="lblStatName" for="totCri">최종 크리티컬 확률</label>
+        <label class="lblStatName" for="totCri">최종 치명타 확률</label>
         <input type="text" readonly class="totStat" name="totCri" id="totCri" value="0">
+        <label class="oper">%</label>
+    </div>
+    <div class="stat">
+        <label class="lblStatName" for="totCri">최종 치명타데미지 증가</label>
+        <input type="text" readonly class="totStat" name="totCDmg" id="totCDmg" value="0">
+        <label class="oper">%</label>
     </div>
     <div class="stat">
         <label class="lblStatName" for="totADmg">최종 데미지 증가</label>
         <input type="text" readonly class="totStat" name="totADmg" id="totADmg" value="0">
+        <label class="oper">%</label>
     </div>
     <div class="stat">
-            <label class="lblStatName" for="totBDmg">최종 보스데미지 증가</label>
+        <label class="lblStatName" for="totBDmg">최종 보스데미지 증가</label>
         <input type="text" readonly class="totStat" name="totBDmg" id="totBDmg" value="0">
+        <label class="oper">%</label>
     </div>
+    <div class="stat">
+        <label class="lblStatName" for="totPDmg">최종 물리 피해량 증감</label>
+        <input type="text" readonly class="totStat" name="totPDmg" id="totPDmg" value="0">
+        <label class="oper">%</label>
+    </div>
+    <div class="stat">
+        <label class="lblStatName" for="totMDmg">최종 마법 피해량 증감</label>
+        <input type="text" readonly class="totStat" name="totMDmg" id="totMDmg" value="0">
+        <label class="oper">%</label>
+    </div>
+    <div class="stat">
+            <label class="lblStatName" for="totEDef">최종 적 방어력</label>
+            <input type="text" readonly class="totStat" name="totEDef" id="totEDef" value="0">
+            <label class="oper"></label>
+        </div>
     <div>
-        <input type="button" value="캐릭터 스탯 계산">
-        <input type="text" readonly>
+        <label class="lblStatName" for="totBDmg">최종 평타 데미지</label>
+        <input type="text" readonly class="totDmg" name="totDmg" id="totDmg" value="0">
     </div>
+</form>
     <script type="text/javascript">
 
        //참고 사이트들
@@ -163,6 +299,7 @@
        //https://cafe.naver.com/kingsraid/736718 // 방어력 공식
        var changeStatClass = document.getElementsByClassName("inputStat");
 
+        //캐릭터 스탯
         var att = document.getElementById("outAtt");
         var cri = document.getElementById("outCri");
         var cDmg = document.getElementById("outCDmg");
@@ -170,18 +307,29 @@
         var aDmg = document.getElementById("outADmg");
         var bDmg = document.getElementById("outBDmg");
         var aSpd = document.getElementById("outASpd");
+
+        //버프 스탯
         var attM = document.getElementById("outAttM");
         var attF = document.getElementById("outAttF");
         var criF = document.getElementById("outCriF");
         var cDmgF = document.getElementById("outCDmgF");
         var bDmgF = document.getElementById("outBDmgF");
 
-
+        //적 스탯
+        var increADmg = document.getElementById("outIncreADmg");
+        var increPDmg = document.getElementById("outIncrePDmg");
+        var increMDmg = document.getElementById("outIncreMDmg");
+        var eDef = document.getElementById("outEDef");
+        
+        //최종 스탯
         var totAtt = document.getElementById("totAtt");
         var totCri = document.getElementById("totCri");
         var totCDmg = document.getElementById("totCDmg");
         var totBDmg = document.getElementById("totBDmg");
-        
+        var totPDmg = document.getElementById("totPDmg");
+        var totMDmg = document.getElementById("totMDmg");
+        var totEDef = document.getElementById("totEDef");
+
         var stats = document.querySelectorAll('.outputStat');
 
 
@@ -195,20 +343,41 @@
         }
         function calcStat(){
             att.innerText = document.getElementById("inAtt").value*1;
-            cri.innerText = document.getElementById("inCri").value/10.0;
+            cri.innerText = document.getElementById("inCri").value/10;
             cDmg.innerText = document.getElementById("inCDmg").value*1+200;
             pDmg.innerText = document.getElementById("inPDmg").value*1;
             aDmg.innerText = document.getElementById("inADmg").value*1+100;
             bDmg.innerText = document.getElementById("inBDmg").value*1+100;
             aSpd.innerText = document.getElementById("inASpd").value*1+100;
+
             attM.innerText = document.getElementById("inAttM").value*1+100;
             attF.innerText = document.getElementById("inAttF").value*1;
-            criF.innerText = document.getElementById("inCriF").value*1;
+            criF.innerText = document.getElementById("inCriF").value/10;
             cDmgF.innerText = document.getElementById("inCDmgF").value*1;
             bDmgF.innerText = document.getElementById("inBDmgF").value*1;
-            totAtt.value = att.innerText * attM.innerText / 100 + attF.innerText*1;
-            totCri
+
+            increADmg.innerText = document.getElementById("inIncreADmg").value*1+100;
+            increPDmg.innerText = document.getElementById("inIncrePDmg").value*1+100;
+            increMDmg.innerText = document.getElementById("inIncreMDmg").value*1+100;
+            eDef.innerText = document.getElementById("inEDef").value*1;
+
+            totAtt.value = Math.round(att.innerText * attM.innerText / 100 + attF.innerText*1);
+            totCri.value = Math.min(Math.round(cri.innerText * 1 + criF.innerText * 1),100) ;
+            totCDmg.value = Math.round(cDmg.innerText * 1 + cDmgF.innerText * 1);
+            totADmg.value = Math.round(aDmg.innerText * 1 );
+            totBDmg.value = Math.round(bDmg.innerText * 1 + bDmgF.innerText * 1);
+            totPDmg.value = Math.round(increADmg.innerText * 1 + increPDmg.innerText * 1 - 100);
+            totMDmg.value = Math.round(increADmg.innerText * 1 + increMDmg.innerText * 1 - 100);
+            totEDef.value = Math.round(eDef.innerText * 1 );
+
+            totDmg.value = comma(Math.round(totAtt.value * (totCri.value/100) * (totCDmg.value/100) * (totADmg.value/100) * (totBDmg.value/100)
+             + totAtt.value * (1 - (totCri.value/100)) * (totADmg.value/100) * (totBDmg.value/100) ));
             
+        }
+        //콤마찍기
+        function comma(str) {
+            str = String(str);
+            return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
         }
         function clickBtn() {
             totAtt.value = att.innerText;           
