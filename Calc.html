@@ -182,7 +182,7 @@
         </div>
         <div class="stat">
                 <label class="lblStatName" for="attC">클래스공격력</label>
-                <input type="number" class="inputStat" name="inAttC" id="inAttC">
+                <input type="number" class="inputStat" name="inAttC" id="inAttC" step="0.1">
                 <label class="oper">+</label>
                 <label class="outputStat" name="outAttC" id="outAttC" readonly>0</label>
                 <label class="oper">%</label>
@@ -366,7 +366,7 @@
             //버프 스탯
             attM.innerText = document.getElementById("inAttM").value*1+100;
             attF.innerText = document.getElementById("inAttF").value*1;
-            attC.innerText = document.getElementById("inAttC").value*1;
+            attC.innerText = document.getElementById("inAttC").value*1+100;
             criF.innerText = document.getElementById("inCriF").value/10;
             cDmgF.innerText = document.getElementById("inCDmgF").value*1;
             bDmgF.innerText = document.getElementById("inBDmgF").value*1;
@@ -378,7 +378,7 @@
             eDef.innerText = document.getElementById("inEDef").value*1;
 
             //최종 스탯
-            totAtt.value = Math.round(att.innerText * attM.innerText / 100 + attF.innerText*1);
+            totAtt.value = Math.round((att.innerText * attM.innerText / 100 + attF.innerText*1) * attC.innerText);
             totCri.value = Math.min(Math.round(cri.innerText * 1 + criF.innerText * 1),100) ;
             totCDmg.value = Math.round(cDmg.innerText * 1 + cDmgF.innerText * 1);
             totADmg.value = Math.round(aDmg.innerText * 1 );
