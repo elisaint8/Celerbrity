@@ -452,15 +452,25 @@
             totMDmg.value = Math.round(increADmg.innerText * 1 + increMDmg.innerText * 1 - 100);
             totEDef.value = Math.round(eDef.innerText * 1 );
 
-            totDmg.value = comma(Math.round(totAtt.value * (totCri.value/100) * (totCDmg.value/100) * (totADmg.value/100) * (totBDmg.value/100)
-             + totAtt.value * (1 - (totCri.value/100)) * (totADmg.value/100) * (totBDmg.value/100) ));
+            totDmg.value = comma(
+                Math.round(
+                    //(기본공격력)
+                    ((totAtt.value))
+                    //치명피해 계수 = 치명타확률*치피 + 노치명
+                    * ((totCri.value/100) * ((totCDmg.value)/100) + (1 - (totCri.value/100))) 
+                    //뎀증, 보스뎀증 계수
+                    * (totADmg.value/100) * (totBDmg.value/100)
+                    //적피증
+                    * (totMDmg.value/100)
+                )
+            );
 
             totSDmg.value = comma(
                 Math.round(
                     //(기본공격력 * 계수 + 스킬 기본데미지)*스킬뎀증
                     (((totAtt.value * skillCoef.innerText) + skillBDmg.innerText*1) * skillIncreDmg.innerText/100)
                     //치명피해 계수 = 치명타확률*치피 + 노치명
-                    * ((totCri.value/100) * ((totCDmg.value+skillCDmg.innerText)/100) + (1 - (totCri.value/100))) 
+                    * ((totCri.value/100) * ((totCDmg.value*1+skillCDmg.innerText*1)/100) + (1 - (totCri.value/100))) 
                     //뎀증, 보스뎀증 계수
                     * (totADmg.value/100) * (totBDmg.value/100)
                     //적피증
