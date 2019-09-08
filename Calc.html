@@ -135,7 +135,7 @@
             <label class="oper">%</label>
         </div>
         <div class="stat">
-            <label class="lblStatName" for="cDmg">치명타데미지</label>
+            <label class="lblStatName" for="cDmg">치명타피해</label>
             <input type="number" class="inputStat" name="inCDmg" id="inCDmg">
             <label class="outputStat" name="outCDmg" id="outCDmg" readonly>200</label>
             <label class="oper">%</label>
@@ -195,7 +195,7 @@
             <label class="oper">%</label>
         </div>
         <div class="stat">
-            <label class="lblStatName" for="cDmgF">치명타데미지</label>
+            <label class="lblStatName" for="cDmgF">치명타피해</label>
             <input type="number" class="inputStat" name="inCDmgF" id="inCDmgF">
             <label class="oper">+</label>
             <label class="outputStat" name="outCDmgF" id="outCDmgF" readonly>0</label>
@@ -209,7 +209,7 @@
             <label class="oper">%</label>
         </div>
     </div>
-    <div name="dStat">
+    <div name="eStat">
         <label>
             <h3>* 적 스탯</h3>
         </label>
@@ -242,6 +242,46 @@
             <label class="oper"></label>
         </div>
     </div>
+    <div name="sStat">
+        <label>
+            <h3>* 스킬 정보</h3>
+        </label>
+        <div class="stat">
+            <label class="lblStatName" for="inSkillName">스킬 이름</label>
+            <input type="text" class="inputStat" name="inSkillName" id="inSkillName">
+            <label class="oper"></label>
+            <label class="outputStat" name="outSkillName" id="outSkillName" readonly>0</label>
+            <label class="oper"></label>
+        </div>
+        <div class="stat">
+            <label class="lblStatName" for="skillCoef">스킬 계수</label>
+            <input type="number" class="inputStat" name="inSkillCoef" id="inSkillCoef" step="0.01">
+            <label class="oper"></label>
+            <label class="outputStat" name="outSkillCoef" id="outSkillCoef" readonly>0</label>
+            <label class="oper"></label>
+        </div>
+        <div class="stat">
+            <label class="lblStatName" for="skillBDmg">스킬 기본데미지</label>
+            <input type="number" class="inputStat" name="inSkillBDmg" id="inSkillBDmg">
+            <label class="oper"></label>
+            <label class="outputStat" name="outSkillBDmg" id="outSkillBDmg" readonly>100</label>
+            <label class="oper"></label>
+        </div>
+        <div class="stat">
+            <label class="lblStatName" for="skillIncreDmg">스킬 데미지 증가</label>
+            <input type="number" class="inputStat" name="inSkillIncreDmg" id="inSkillIncreDmg">
+            <label class="oper"></label>
+            <label class="outputStat" name="outSkillIncreDmg" id="outSkillIncreDmg" readonly>100</label>
+            <label class="oper">%</label>
+        </div>
+        <div class="stat">
+            <label class="lblStatName" for="skillCDmg">스킬 치명타 피해량</label>
+            <input type="number" class="inputStat" name="inSkillCDmg" id="inSkillCDmg">
+            <label class="oper">+</label>
+            <label class="outputStat" name="outSkillCDmg" id="outSkillCDmg" readonly>0</label>
+            <label class="oper">%</label>
+        </div>
+    </div>   
 
     <br>
     <input type="reset" class="btnComp" name="comp" id="comp" value="재입력"
@@ -295,12 +335,21 @@
             <label class="lblStatName" for="totEDef">최종 적 방어력</label>
             <input type="text" readonly class="totStat" name="totEDef" id="totEDef" value="0">
             <label class="oper"></label>
-        </div>
-    <div>
-        <label class="lblStatName" for="totBDmg">최종 평타 데미지</label>
+    </div>
+    <div class="stat">
+        <label class="lblStatName" for="totDmg">최종 기본 데미지</label>
         <input type="text" readonly class="totDmg" name="totDmg" id="totDmg" value="0">
     </div>
+    <div class="stat">
+        <label class="lblStatName" for="totSDmg">스킬 데미지</label>
+        <input type="text" readonly class="totDmg" name="totSDmg" id="totSDmg" value="0">
+    </div>
 </form>
+
+
+
+
+
     <script type="text/javascript">
 
        //참고 사이트들
@@ -332,6 +381,13 @@
         var increPDmg = document.getElementById("outIncrePDmg");
         var increMDmg = document.getElementById("outIncreMDmg");
         var eDef = document.getElementById("outEDef");
+
+        //스킬 정보
+        var skillName = document.getElementById("outSkillName");
+        var skillCoef = document.getElementById("outSkillCoef");
+        var skillBDmg = document.getElementById("outSkillBDmg");
+        var skillIncreDmg = document.getElementById("outSkillIncreDmg");
+        var skillCDmg = document.getElementById("outSkillCDmg");
         
         //최종 스탯
         var totAtt = document.getElementById("totAtt");
@@ -341,6 +397,8 @@
         var totPDmg = document.getElementById("totPDmg");
         var totMDmg = document.getElementById("totMDmg");
         var totEDef = document.getElementById("totEDef");
+        var totDmg = document.getElementById("totDmg");
+        var totSDmg = document.getElementById("totSDmg");
 
         var stats = document.querySelectorAll('.outputStat');
 
@@ -377,8 +435,15 @@
             increMDmg.innerText = document.getElementById("inIncreMDmg").value*1+100;
             eDef.innerText = document.getElementById("inEDef").value*1;
 
+            //스킬 정보
+            skillName.innerText = document.getElementById("inSkillName").value;
+            skillCoef.innerText = document.getElementById("inSkillCoef").value*1;
+            skillBDmg.innerText = document.getElementById("inSkillBDmg").value*1;
+            skillIncreDmg.innerText = document.getElementById("inSkillIncreDmg").value*1+100;
+            skillCDmg.innerText = document.getElementById("inSkillCDmg").value*1;
+
             //최종 스탯
-            totAtt.value = Math.round((att.innerText * attM.innerText / 100 + attF.innerText*1) * attC.innerText);
+            totAtt.value = Math.round((att.innerText * (attM.innerText / 100) + attF.innerText*1) * attC.innerText/100);
             totCri.value = Math.min(Math.round(cri.innerText * 1 + criF.innerText * 1),100) ;
             totCDmg.value = Math.round(cDmg.innerText * 1 + cDmgF.innerText * 1);
             totADmg.value = Math.round(aDmg.innerText * 1 );
@@ -389,6 +454,19 @@
 
             totDmg.value = comma(Math.round(totAtt.value * (totCri.value/100) * (totCDmg.value/100) * (totADmg.value/100) * (totBDmg.value/100)
              + totAtt.value * (1 - (totCri.value/100)) * (totADmg.value/100) * (totBDmg.value/100) ));
+
+            totSDmg.value = comma(
+                Math.round(
+                    //(기본공격력 * 계수 + 스킬 기본데미지)*스킬뎀증
+                    (((totAtt.value * skillCoef.innerText) + skillBDmg.innerText*1) * skillIncreDmg.innerText/100)
+                    //치명피해 계수 = 치명타확률*치피 + 노치명
+                    * ((totCri.value/100) * ((totCDmg.value+skillCDmg.innerText)/100) + (1 - (totCri.value/100))) 
+                    //뎀증, 보스뎀증 계수
+                    * (totADmg.value/100) * (totBDmg.value/100)
+                    //적피증
+                    * (totMDmg.value/100)
+                )
+            );
             
         }
         //콤마찍기
