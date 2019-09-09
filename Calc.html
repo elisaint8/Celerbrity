@@ -113,6 +113,7 @@
 </head>
 
 <body>
+    <input type='file' accept='text/plain' id = "file-input" name="file-input">
 <form>
     <div name="cStat">
         <label>
@@ -341,8 +342,12 @@
         <input type="text" readonly class="totDmg" name="totDmg" id="totDmg" value="0">
     </div>
     <div class="stat">
-        <label class="lblStatName" for="totSDmg">스킬 데미지</label>
-        <input type="text" readonly class="totDmg" name="totSDmg" id="totSDmg" value="0">
+        <label class="lblStatName" for="totPSDmg">물리스킬 데미지</label>
+        <input type="text" readonly class="totDmg" name="totPSDmg" id="totPSDmg" value="0">
+    </div>
+    <div class="stat">
+        <label class="lblStatName" for="totMSDmg">마법스킬 데미지</label>
+        <input type="text" readonly class="totDmg" name="totMSDmg" id="totMSDmg" value="0">
     </div>
 </form>
 
@@ -398,13 +403,31 @@
         var totMDmg = document.getElementById("totMDmg");
         var totEDef = document.getElementById("totEDef");
         var totDmg = document.getElementById("totDmg");
-        var totSDmg = document.getElementById("totSDmg");
+        var totPSDmg = document.getElementById("totPSDmg");
+        var totMSDmg = document.getElementById("totMSDmg");
 
         var stats = document.querySelectorAll('.outputStat');
 
 
         // var autoCal = document.querySelector('.lblStatName');
         // var buffAtt = document.querySelector('#buffAttR')
+
+        //파일 이벤트리스너 등록
+        document.getElementById("file-input").addEventListener("change", readFile, false); 
+        var fileData;
+        function readFile(e) {
+            var file = e.target.files[0];
+            if (!file) {
+                return;
+            }
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                fileData= e.target.result;
+                // 파일 데이터를 사용할 기능 구현
+                console.log(fileData); 
+            };
+            reader.readAsText(file);
+        }
 
         comp.addEventListener("click",calcDmg);
         //입력칸들에게 이벤트리스너 등록
@@ -465,7 +488,7 @@
                 )
             );
 
-            totSDmg.value = comma(
+            totMSDmg.value = comma(
                 Math.round(
                     //(기본공격력 * 계수 + 스킬 기본데미지)*스킬뎀증
                     (((totAtt.value * skillCoef.innerText) + skillBDmg.innerText*1) * skillIncreDmg.innerText/100)
@@ -475,6 +498,19 @@
                     * (totADmg.value/100) * (totBDmg.value/100)
                     //적피증
                     * (totMDmg.value/100)
+                )
+            );
+
+            totPSDmg.value = comma(
+                Math.round(
+                    //(기본공격력 * 계수 + 스킬 기본데미지)*스킬뎀증
+                    (((totAtt.value * skillCoef.innerText) + skillBDmg.innerText*1) * skillIncreDmg.innerText/100)
+                    //치명피해 계수 = 치명타확률*치피 + 노치명
+                    * ((totCri.value/100) * ((totCDmg.value*1+skillCDmg.innerText*1)/100) + (1 - (totCri.value/100))) 
+                    //뎀증, 보스뎀증 계수
+                    * (totADmg.value/100) * (totBDmg.value/100)
+                    //적피증
+                    * (totPDmg.value/100)
                 )
             );
             
